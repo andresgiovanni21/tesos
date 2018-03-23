@@ -110,7 +110,7 @@
           var c = url.searchParams.get("key");
 
           var handler = ePayco.checkout.configure({
-               key: '45b960805ced5c27ce34b1600b4b9f54',
+               key: 'ef0f99ecc85bad613bfe73368cacc04b',
                test: true
           });
 
@@ -132,17 +132,9 @@
 
                //Atributos opcionales
                extra1: c,
-               extra2: "extra2",
-               extra3: "extra3",
-               confirmation: "http://secure2.payco.co/prueba_curl.php",
-               response: "http://secure2.payco.co/prueba_curl.php",
+               confirmation: "http://tesos.teraton.co/confirmacion-de-servicio.php",
+               response: "http://tesos.teraton.co/respuesta-de-servicio.html",
 
-               //Atributos cliente
-               name_billing: "Andres Perez",
-               address_billing: "Carrera 19 numero 14 91",
-               type_doc_billing: "cc",
-               mobilephone_billing: "3050000000",
-               number_doc_billing: "100000000"
           }
           $("#payBut").click(function() {
 
