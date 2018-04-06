@@ -450,6 +450,9 @@ p {
 }
 
 .section-subtitle._2 {
+  margin-bottom: 25px;
+  padding-right: 90px;
+  padding-left: 90px;
   color: #000;
 }
 
@@ -473,6 +476,13 @@ p {
 .section-subtitle._2._5 {
   margin-top: 21px;
   margin-bottom: -18px;
+}
+
+.section-subtitle._4 {
+  margin-bottom: 32px;
+  color: #000;
+  font-size: 17px;
+  line-height: 20px;
 }
 
 .bold-text {
@@ -744,7 +754,8 @@ p {
 }
 
 .div-block-4 {
-  height: 260px;
+  height: 290px;
+  margin-top: 21px;
   margin-bottom: 15px;
   background-image: url('../images/kevin-364843-unsplash_1.jpg');
   background-position: 50% 50%;
@@ -868,6 +879,11 @@ p {
 
 .row-2 {
   margin-bottom: 61px;
+}
+
+.paragraph-4._2 {
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 .link-block-2 {
@@ -1123,6 +1139,22 @@ p {
   margin-top: 18px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.heading-8._2 {
+  margin-bottom: 22px;
+}
+
+.text-field-2 {
+  display: block;
+}
+
+.text-field-3 {
+  display: block;
+}
+
+.link {
+  color: #ff630a;
 }
 
 html.w-mod-js *[data-ix="fade-in-on-load"] {
