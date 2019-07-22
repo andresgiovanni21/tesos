@@ -1,2 +1,0 @@
-# tesos
-gafg
