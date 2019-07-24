@@ -1,6 +1,4 @@
-
 function name(compania, oferta, contacto, cargo) {
-
     //tamaño de la primera imagen
     var tesos_img_w_h = 60;
     //tamaño de la pagina del pdf
@@ -102,26 +100,27 @@ function name(compania, oferta, contacto, cargo) {
     doc.text("Ref.: " + oferta + "-TESO dedicado", docWidth - 30, paddCount, "right");
     paddCount = paddCount + 10;
     //texto
+    var estimados;
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: 'plan_dedicado.html',
+        success: function (data) {
+            var ele = $(data);
+            //$(ele.get(29)).children(0).children(0).children(2).get(0).textContent=compania;
+            //$(ele.get(29)).find("#cliente").get(0).textContent=compania;
+
+            //$(ele).find("#cliente").every.textContent=compania;
+            console.log($(ele.get(29)).find("#cliente").every);
+            estimados = String(ele.get(29).innerHTML);
 
 
-    $(".invis").load("plan_dedicado.html div#estimados");
-    doc.fromHTML('<p><FONT SIZE=3>Estimados Señores,</FONT></p> <p style="line-height:1.4"> <FONT SIZE=3>Agradecemos a su Organización </FONT><FONT SIZE=3><B><SPAN id="cliente">$contacto</SPAN></B></FONT> <FONT SIZE=3><B></B></FONT><FONT SIZE=3>por tener en cuenta a </FONT> <FONT SIZE=3><B>Grupo TUiNNO.SAS</B></FONT><FONT SIZE=3> y a su marca </FONT><a HREF="http://www.tesos.co/"> <FONT SIZE=3><I>TESOS.CO®</I></FONT></a> <FONT SIZE=3> como proveedor de los servicios que cotizamos en la presente oferta.</FONT></p> ', 30, paddCount, {
-        'width': 150
-    });
-    /*
-    $.ajax("plan_dedicado.html", {
-        success: function (response) {
-            var elements = $(response);
-            //console.log(String(elements.get(29).innerHTML));
-
-            doc.fromHTML('<p><FONT SIZE=3>Estimados Señores,</FONT></p> <p style="line-height:1.4"> <FONT SIZE=3>Agradecemos a su Organización </FONT><FONT SIZE=3><B><SPAN id="cliente">$contacto</SPAN></B></FONT> <FONT SIZE=3><B></B></FONT><FONT SIZE=3>por tener en cuenta a </FONT> <FONT SIZE=3><B>Grupo TUiNNO.SAS</B></FONT><FONT SIZE=3> y a su marca </FONT><a HREF="http://www.tesos.co/"> <FONT SIZE=3><I>TESOS.CO®</I></FONT></a> <FONT SIZE=3> como proveedor de los servicios que cotizamos en la presente oferta.</FONT></p> ', 30, paddCount, {
-                'width': 150
-            });
         }
+    });
 
-    });*/
-
-
+    doc.fromHTML(estimados, 30, paddCount, {
+        "width": 150
+    });
 
     doc.save("DOWN.pdf");
 }
