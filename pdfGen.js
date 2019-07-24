@@ -99,20 +99,56 @@ function name(compania, oferta, contacto, cargo) {
     paddCount = paddCount + 9;
     doc.text("Ref.: " + oferta + "-TESO dedicado", docWidth - 30, paddCount, "right");
     paddCount = paddCount + 10;
+
     //texto
     var estimados;
+    var terminos;
+    var quienes;
+    var descripcion;
+    var tabla1;
+    var niveles;
+    var para;
+    var costos;
+    var tecnico;
+    var niveles2;
+    var costos2;
+    var supuestos;
+    var condiciones;
+
     $.ajax({
         async: false,
         type: "GET",
         url: 'plan_dedicado.html',
         success: function (data) {
             var ele = $(data);
-            //$(ele.get(29)).children(0).children(0).children(2).get(0).textContent=compania;
-            //$(ele.get(29)).find("#cliente").get(0).textContent=compania;
+            //console.log(ele);
+            //cambiar valores
+            var cliente = $(ele).find("#cliente");
+            cliente.get(0).textContent = compania;
+            cliente.get(1).textContent = compania;
+            cliente.get(2).textContent = compania;
+            cliente.get(3).textContent = compania;
+            cliente.get(4).textContent = compania;
+            cliente.get(5).textContent = compania;
+            cliente.get(6).textContent = compania;
+            cliente.get(7).textContent = compania;
+            //console.log(cliente);
 
-            //$(ele).find("#cliente").every.textContent=compania;
-            console.log($(ele.get(29)).find("#cliente").every);
-            estimados = String(ele.get(29).innerHTML);
+            //crear variables con el html
+            estimados = ele.get(9).innerHTML;
+            terminos = ele.get(11).innerHTML;
+            quienes = ele.get(13).innerHTML;
+            descripcion = ele.get(15).innerHTML;
+            //tabla1 = ele.get(17).innerHTML;
+            niveles = ele.get(19).innerHTML;
+            para = ele.get(21).innerHTML;
+            costos = ele.get(23).innerHTML;
+            tecnico = ele.get(25).innerHTML;
+            niveles2 = ele.get(27).innerHTML;
+            costos2 = ele.get(29).innerHTML;
+            supuestos = ele.get(31).innerHTML;
+            condiciones = ele.get(33).innerHTML;
+
 
 
         }
@@ -121,6 +157,107 @@ function name(compania, oferta, contacto, cargo) {
     doc.fromHTML(estimados, 30, paddCount, {
         "width": 150
     });
+
+    //imagen firma
+    var myImage2 = new Image(38, 18);
+    myImage2.src = "./images/grupoTuinno.jpg";
+    paddCount = paddCount + 120;
+    doc.addImage(myImage2, "JPG", 25, paddCount, 38, 18, "LEFT");
+    doc.setFontSize(10);
+    doc.setFont("calibri", "bold");
+    doc.text("Representante Comercial", 67, paddCount + 7, "left");
+    doc.text("coordinador@tesos.co", 67, paddCount + 11, "left");
+    // aqui va el contenido
+
+    //3 pagina
+    doc.addPage('a4', 'p');
+    paddCount = 40;
+
+    //terminos
+    doc.fromHTML(terminos, 30, paddCount, {
+        "width": 155
+    });
+    //quienes
+    paddCount = paddCount + 65;
+    doc.fromHTML(quienes, 30, paddCount, {
+        "width": 155
+    });
+
+    //Slogan
+    paddCount = paddCount + 125;
+    doc.setFontSize(12);
+    doc.setFont("calibri", "bold");
+    doc.text("“En TESOS.CO® estamos convencidos que la tecnología no tiene por qué ser un problema para nuestros Clientes”", parseInt((docWidth / 2)), paddCount, {
+        "align": "center",
+        "maxWidth": 110
+    });
+
+    //4 pagina
+    doc.addPage('a4', 'p');
+    paddCount = 40;
+    doc.fromHTML(descripcion, 30, paddCount, {
+        "width": 155
+    });
+
+    //tabla1
+    paddCount = 100;
+    doc.fromHTML(tabla1, 30, paddCount, {
+        "width": 30
+    });
+
+    //5 pagina
+    doc.addPage('a4', 'p');
+    paddCount = 40;
+    doc.fromHTML(niveles, 30, paddCount, {
+        "width": 155
+    });
+    paddCount = paddCount + 100;
+    doc.fromHTML(para, 30, paddCount, {
+        "width": 150
+    });
+
+    paddCount = paddCount + 20;
+    doc.fromHTML(costos, 30, paddCount, {
+        "width": 150
+    });
+
+    //6 pagina
+    doc.addPage('a4', 'p');
+    paddCount = 40;
+    doc.fromHTML(tecnico, 30, paddCount, {
+        "width": 155
+    });
+
+    //7 pagina
+    doc.addPage('a4', 'p');
+    paddCount = 40;
+    doc.fromHTML(niveles2, 30, paddCount, {
+        "width": 155
+    });
+    paddCount = paddCount + 80;
+    doc.fromHTML(para, 30, paddCount, {
+        "width": 150
+    });
+
+
+    //8 pagina
+    doc.addPage('a4', 'p');
+    paddCount = 40;
+    doc.fromHTML(costos2, 30, paddCount, {
+        "width": 155
+    });
+    paddCount = paddCount + 40;
+    doc.fromHTML(supuestos, 30, paddCount, {
+        "width": 150
+    });
+
+    //9 pagina
+    doc.addPage('a4', 'p');
+    paddCount = 40;
+    doc.fromHTML(condiciones, 30, paddCount, {
+        "width": 130
+    });
+
 
     doc.save("DOWN.pdf");
 }
