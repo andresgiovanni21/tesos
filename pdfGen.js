@@ -349,8 +349,6 @@ function dedicado(compania, oferta, contacto, cargo) {
     doc.fromHTML(condiciones, 30, paddCount, {
         "width": 130
     });
-
-
     doc.save("DOWN.pdf");
 }
 
@@ -980,3 +978,5 @@ function marcaBlanca(compania, oferta, contacto, cargo) {
 
     doc.save("DOWN.pdf");
 }
+
+
