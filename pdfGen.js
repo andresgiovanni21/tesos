@@ -132,7 +132,7 @@ function dedicado(compania, oferta, contacto, cargo) {
         url: 'plan_dedicado.html',
         success: function (data) {
             var ele = $(data);
-            console.log(ele);
+            //console.log(ele);
             //cambiar valores
             var cliente = $(ele).find("#cliente");
             cliente.get(0).textContent = compania;
@@ -486,7 +486,7 @@ function compartido(compania, oferta, contacto, cargo) {
         url: 'plan_compartido.html',
         success: function (data) {
             var ele = $(data);
-            console.log(ele);
+            //console.log(ele);
             //cambiar valores
             var cliente = $(ele).find("#cliente");
             cliente.get(0).textContent = compania;
@@ -677,8 +677,6 @@ function marcaBlanca(compania, oferta, contacto, cargo) {
 
     var myImage4 = new Image();
     myImage4.src = "./images/header.png";
-
-
 
 
     if (docFormat == 'a4') {
@@ -908,7 +906,6 @@ function marcaBlanca(compania, oferta, contacto, cargo) {
         "maxWidth": 110
     });
 
-
     //5 pagina
     doc.addPage('a4', 'p');
 
@@ -978,5 +975,4 @@ function marcaBlanca(compania, oferta, contacto, cargo) {
 
     doc.save("DOWN.pdf");
 }
-
 

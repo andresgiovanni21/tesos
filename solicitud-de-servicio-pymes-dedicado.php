@@ -1,3 +1,4 @@
+<?php require "./config.php";  ?>
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
 <!--  Last Published: Mon Aug 12 2019 21:01:10 GMT+0000 (UTC)  -->
@@ -26,6 +27,8 @@
 
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+
 
     <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
     <script type="text/javascript">
@@ -73,7 +76,10 @@
             <div class="section-subtitle _2 _3">Al seleccionar la opción de Cotizar en el formulario podrás descargar un PDF con tu cotización personalizada.</div>
             <div class="form-block w-form">
 
-                <form id="wf-form-pymeDForm" name="wf-form-pymeDForm" data-name="pymeDForm" action="/enviar_correo_pd.php" method="post"><input type="text" class="text-field w-input r" maxlength="256" name="Nombre3" data-name="Nombre3" placeholder="Nombres y Apellidos*" id="Nombre-3" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Cargo3" data-name="Cargo3" placeholder="Cargo*" id="Cargo" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Empresa" data-name="Empresa3" placeholder="Empresa*" id="Empresa" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Nit" data-name="Nit" placeholder="Nit*" id="Nit" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Celular3" data-name="Celular3" placeholder="Número de teléfono celular*" id="Celular-3" required=""><input type="email" class="text-field w-input r" maxlength="256" name="Email3" data-name="Email3" placeholder="Correo electrónico*" id="Email-5" required=""><label class="w-checkbox checkbox-field"><input type="checkbox" id="Acepto1" name="Acepto3" data-name="Acepto3" checked="" class="w-checkbox-input"><span for="Acepto1" class="field-label w-form-label">Autorizo ser contactado por un representante de ventas.</span><input id="butCot" type="submit" value="Cotizar" data-wait="Espere por favor..." class="submit-button w-button"></form>
+
+
+                <form id="wf-form-pymeDForm" name="wf-form-pymeDForm" data-name="pymeDForm" action="/enviar_correo_pd.php" method="post"><input type="text" class="text-field w-input r" maxlength="256" name="Nombre3" data-name="Nombre3" placeholder="Nombres y Apellidos*" id="Nombre-3" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Cargo3" data-name="Cargo3" placeholder="Cargo*" id="Cargo" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Empresa" data-name="Empresa3" placeholder="Empresa*" id="Empresa" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Nit" data-name="Nit" placeholder="Nit*" id="Nit" required=""><input type="text" class="text-field w-input r" maxlength="256" name="Celular3" data-name="Celular3" placeholder="Número de teléfono celular*" id="Celular-3" required=""><input type="email" class="text-field w-input r" maxlength="256" name="Email3" data-name="Email3" placeholder="Correo electrónico*" id="Email-5" required=""><label class="w-checkbox checkbox-field"><input type="checkbox" id="Acepto1" name="Acepto3" data-name="Acepto3" checked="" class="w-checkbox-input"><span for="Acepto1" class="field-label w-form-label">Autorizo ser contactado por un representante de ventas.</span><input id="butCot" type="submit" value="Cotizar" data-wait="Espere por favor..." class="submit-button w-button">
+                </form>
                 <div class="w-form-done">
                     <div>Gracias! Su formulario ha sido recibido!</div>
                 </div>
@@ -112,17 +118,40 @@
     </div>
     <script>
         $("#butCot").click(function() {
-            console.log("holiii");
             var isValid = true;
             $('.r').each(function() {
+
                 if ($(this).val() === '') {
-                    console.log($(this) + 'entre aqui++++++++++++++++++++++++++++++++++++++++++++++++++');
+
                     isValid = false;
                 }
             });
 
             if (isValid) {
-                marcaBlanca($('#Empresa').val(), 523, $('#Nombre-3').val(), $('#Cargo').val());
+
+                //DBConnection
+                <?php
+                $varRow = 0;
+                $readquery = "SELECT * FROM oferta";
+                $fire = mysqli_query($con,$readquery) or die("cannot read data from database");
+
+                if (mysqli_num_rows($fire) > 0) {
+                    while($row = mysqli_fetch_assoc($fire)) {
+                        $varRow=(int)$row['num'];
+                    }
+                } else {
+                    echo "0 results";
+                }
+                $varRow++;
+                $updatequery = "UPDATE oferta SET num=".$varRow;
+                $fire2 = mysqli_query($con, $updatequery) or die("cannot read data from database");
+                mysqli_close($con);
+                ?>
+
+                var ofertaD = "<?php echo $varRow ?>";
+
+                dedicado($('#Empresa').val(), ofertaD, $('#Nombre-3').val(), $('#Cargo').val());
+
             }
 
         });

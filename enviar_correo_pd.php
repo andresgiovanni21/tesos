@@ -129,6 +129,7 @@ $email_body2 = '<html><body style="background-color: #f4f4f4; margin: 0 !importa
                                    <p style="margin: 0;">Cordialmente,<br>GERENCIA DE SERVICIO TESOS.CO</p>
                               </td>
                          </tr>
+
                     </table>
                 <!--[if (gte mso 9)|(IE)]>
             </td>
@@ -146,9 +147,9 @@ $email_body2 = '<html><body style="background-color: #f4f4f4; margin: 0 !importa
 </html>
 ';
 
-mail($para, $asunto, $email_body, $headers);
-mail($para2, $asunto2, $email_body2, $headers2);
-header($redirect);
+//mail($para, $asunto, $email_body, $headers);
+//mail($para2, $asunto2, $email_body2, $headers2);
+#header($redirect);
 ?>
 
 
